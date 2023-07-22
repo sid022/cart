@@ -9,7 +9,22 @@ class CartItem extends React.Component {
             qty: 1,
             img: ''
         }
+        //this.testing();
     }
+    // testing () {
+    //     const promise = new Promise((resolve, reject) =>{
+    //         setTimeout(() => {
+    //             resolve('done');
+    //         },5000);
+    //     })
+    //     promise.then(() =>{
+    //         // setState acts like a synchronous call
+    //         this.setState({qty: this.state.qty + 10});
+    //         this.setState({qty: this.state.qty + 10});
+    //         this.setState({qty: this.state.qty + 10});
+    //         console.log('state' ,this.state);
+    //     });
+    // }
     increaseQuantity =()=>{
         //this.state.qty +=1;
         // console.log('this',this.state);
@@ -23,18 +38,34 @@ class CartItem extends React.Component {
             return{
                 qty: prevState.qty + 1
             } 
+        }, () => {
+            console.log('this.state', this.state);
+        });
+    }
+    decreaseQuantity =() => {
+        const {qty} = this.state;
+        if(qty===0){
+            return;
+        }
+        this.setState((prevState) => {
+            return{
+                qty: prevState.qty -1
+            }
         });
     }
     render () {
-        const { price, title,qty } = this.state;
+        console.log('this.props', this.props);
+        const { price, title,qty } = this.props.product;
         return (
             <div className="cart-item">
+                {this.props.jsx}
                 <div className="left-block">
                     <img style={styles.image}/>
                 </div>
                 <div className="right-block">
                     <div style={{fontSize: 25}}>{title}</div>
-                    <div style={{color: '#777'}}>Rs {price}</div>
+                    <div style={{color: '#777'}}>Rs
+                     {price}</div>
                     <div style={{color: '#777'}}>Qty: {qty}</div>
                     <div className="cart-item-actions">
                         {/* {Buttons} */}
@@ -48,6 +79,7 @@ class CartItem extends React.Component {
                             alt="decrease" 
                             className="action-icon" 
                             src="https://img.icons8.com/?size=512&id=1504&format=png"
+                            onClick={this.decreaseQuantity.bind(this)}
                         />
                         <img 
                             alt="delete" 

@@ -1,14 +1,14 @@
 import React from 'react';
 import CartItem from './CartItem';
-
+import Cart from './Cart';
 function App() {
   const name = "Sid";
   // const loading = false;
-  const isLoggedin = true;
+  // const isLoggedin = true;
 
   return (
     <div className="App">
-      <CartItem />
+      <Cart />
     </div>
   );
 }
