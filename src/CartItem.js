@@ -25,37 +25,42 @@ class CartItem extends React.Component {
     //         console.log('state' ,this.state);
     //     });
     // }
-    increaseQuantity =()=>{
-        //this.state.qty +=1;
-        // console.log('this',this.state);
-        // setState form 1
-        // this.setState({
-        //     qty: this.state.qty +1
-        // });
+    // increaseQuantity =()=>{
+    //     //this.state.qty +=1;
+    //     // console.log('this',this.state);
+    //     // setState form 1
+    //     // this.setState({
+    //     //     qty: this.state.qty +1
+    //     // });
         
-        // setState form 2
-        this.setState((prevState) =>{
-            return{
-                qty: prevState.qty + 1
-            } 
-        }, () => {
-            console.log('this.state', this.state);
-        });
-    }
-    decreaseQuantity =() => {
-        const {qty} = this.state;
-        if(qty===0){
-            return;
-        }
-        this.setState((prevState) => {
-            return{
-                qty: prevState.qty -1
-            }
-        });
-    }
+    //     // setState form 2
+    //     this.setState((prevState) =>{
+    //         return{
+    //             qty: prevState.qty + 1
+    //         } 
+    //     }, () => {
+    //         console.log('this.state', this.state);
+    //     });
+    // }
+    // decreaseQuantity =() => {
+    //     const {qty} = this.state;
+    //     if(qty===0){
+    //         return;
+    //     }
+    //     this.setState((prevState) => {
+    //         return{
+    //             qty: prevState.qty -1
+    //         }
+    //     });
+    // }
     render () {
         console.log('this.props', this.props);
         const { price, title,qty } = this.props.product;
+        const { 
+            product,
+            onIncreaseQuantity,
+            onDecreaseQuantity,
+            onDeleteProduct} =this.props;
         return (
             <div className="cart-item">
                 {this.props.jsx}
@@ -73,19 +78,20 @@ class CartItem extends React.Component {
                             alt="increase" 
                             className="action-icon" 
                             src="https://img.icons8.com/?size=512&id=1501&format=png"
-                            onClick={this.increaseQuantity.bind(this)}
+                            onClick={() => onIncreaseQuantity(product)}
                         />
                         <img 
                             alt="decrease" 
                             className="action-icon" 
                             src="https://img.icons8.com/?size=512&id=1504&format=png"
-                            onClick={this.decreaseQuantity.bind(this)}
+                            onClick={() => onDecreaseQuantity(product)}
                         />
                         <img 
                             alt="delete" 
                             className="action-icon" 
                             src="https://img.icons8.com/?size=512&id=57061&format=png"
-                        />
+                            onClick={() => onDeleteProduct(product.id)}
+                        />  
                     </div>
                 </div>
             </div>
